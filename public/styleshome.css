@@ -1,0 +1,96 @@
+/* General Body Styling */
+body {
+    background-color: #FAF7F5;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Logo Styling */
+.logo {
+    width: 70px;
+    height: 20px;
+}
+
+/* Flex Layout for Navigation Menu */
+.menubar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+}
+
+/* Styling the Navigation List */
+ol {
+    display: flex;
+    list-style-type: none;
+    gap: 40px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Hover Effects for Links */
+.HOME {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect on link */
+.HOME:hover {
+    color: #007BFF; /* Change the color on hover */
+}
+
+/* Icons Styling */
+.cart,
+.list {
+    width: 20px;
+    cursor: pointer;
+}
+
+/* Icon hover effect */
+.cart:hover,
+.list:hover {
+    opacity: 0.7;
+}
+
+/* Search Bar Styling */
+.search {
+    width: 150px;
+    height: 25px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+/* Icons Section Styling */
+.icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+/* Responsiveness for Smaller Screens */
+@media (max-width: 768px) {
+    /* Adjusting Menubar Layout */
+    .menubar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Adjusting List Layout */
+    ol {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    /* Adjusting Icon Layout */
+    .icons {
+        margin-top: 20px;
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,103 @@
+/* General Body Styles */
+body {
+    background-color: #FAF7F5;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation Bar */
+.menubar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+.menubar .logo {
+    width: 70px;
+    height: 20px;
+}
+
+.menubar .list ol {
+    display: flex;
+    gap: 40px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menubar .list li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.menubar .list li a:hover {
+    color: #FF6347;
+}
+
+/* About Us Section */
+.about-us {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.about-us h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.about-us p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-us h2 {
+    font-size: 28px;
+    margin-top: 40px;
+    color: #333;
+}
+
+.about-us ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.about-us ul li {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Contact Section */
+.about-us a {
+    color: #FF6347;
+    text-decoration: none;
+}
+
+.about-us a:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.footer-container {
+    margin-top: 20px;
+}
+
+.footer-container p {
+    margin: 0;
+}

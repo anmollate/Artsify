@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <title>Artistry | <%= title %></title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="Forgot-container">
+        <div class="login-txt">Trouble Logging In?</div>
+        <div class="subs">Enter your email and we'll send you a link to reset your password.</div>
+
+        <% if (error) { %>
+            <div class="error-msg"><%= error %></div>
+        <% } %>
+
+        <form action="/forgot" method="POST" class="credentials">
+            <div class="username">
+                <label for="email">Email:</label>
+                <input class="inputbox1" type="email" name="email" placeholder="Enter your email" required>
+            </div>
+
+            <button type="submit" class="login-butt">Send Link</button>
+        </form>
+
+        <div class="signup"><a class="signup1" href="/">Back To Login</a></div>
+    </div>
+</body>
+</html>

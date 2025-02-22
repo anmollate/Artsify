@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+    <title>Artistry | SignUp</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="signup-container">
+        <div class="login-txt">SignUp</div>
+        <div class="subs">Join The Community Today!</div>
+
+        <form action="/signup" method="POST" onsubmit="return validatePassword()">
+            <div class="credentials">
+                <div class="username">
+                    <div>Username:</div>
+                    <input class="inputbox1" type="text" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="password">
+                    <div>Password:</div>
+                    <input id="password" class="inputbox2" type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="password">
+                    <div>Confirm Password:</div>
+                    <input id="confirmPassword" class="inputbox2" type="password" placeholder="Confirm Password" required>
+                    <p id="passwordError" style="color: red; font-size: 14px;"></p>
+                </div>
+
+                <div class="password">
+                    <div>Email:</div>
+                    <input class="inputbox2" type="email" name="email" placeholder="Email" required>
+                </div>
+
+                <button type="submit" class="login-butt">Signup</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var errorMsg = document.getElementById("passwordError");
+
+            if (password !== confirmPassword) {
+                errorMsg.textContent = "Passwords do not match!";
+                return false; 
+            } else {
+                errorMsg.textContent = ""; 
+                return true;
+            }
+        }
+    </script>
+
+    <% if (typeof error !== "undefined" && error) { %>
+    <script>
+        alert("<%= error %>");
+    </script>
+    <% } %>
+
+</body>
+</html>

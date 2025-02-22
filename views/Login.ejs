@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon.ico">
+
+    <title>Artistry | <%= title %></title>
+    <link rel="stylesheet" href="styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <form action="/login" method="POST">
+            <div class="login-txt">Login</div>
+            <div class="subs">Welcome Back! Please Login To Your Account.</div>
+
+            <% if (error) { %>
+                <div class="error-message"><%= error %></div>
+            <% } %>
+
+            <div class="credentials">
+                <div class="username">
+                    <label>Username:</label>
+                    <input class="inputbox1" type="text" name="username" placeholder="Username" required>
+                </div>
+
+                <div class="password">
+                    <label>Password:</label>
+                    <input class="inputbox2" type="password" name="password" placeholder="Password" required>
+                </div>
+
+                <div class="forgot-pass"><a href="/forgot">Forgot Password?</a></div>
+                
+                <button class="login-butt" type="submit">Login</button>
+
+                <div class="signup">Don't Have An Account? <a class="signup1" href="/signup">Sign Up</a></div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

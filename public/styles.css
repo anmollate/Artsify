@@ -1,0 +1,165 @@
+.forgot-pass
+{
+    text-decoration: none; /* Removes the underline */
+    color: inherit; /* Makes the link color inherit from its parent element */
+    cursor: pointer; /* Ensures it still behaves like a clickable link */
+    font-family: Arial, Helvetica, sans-serif;
+    color:gray;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.signup
+{
+    font-family: Arial, Helvetica, sans-serif;
+    color:gray;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.signup1
+{
+    text-decoration: none; /* Removes the underline */
+    color: black; /* Makes the link color inherit from its parent element */
+    cursor: pointer; /* Ensures it still behaves like a clickable link */
+}
+
+
+
+
+body
+{
+    background-image:url(images/login_background.jpg);
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-size: 100vw 100vh;
+
+}
+
+.login-container
+{
+    width:500px;
+    height: 500px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Shift the box back by half its width and height */
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+.signup-container
+{
+    width:500px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Shift the box back by half its width and height */
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+.Forgot-container
+{
+    width:500px;
+    height: 350px;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Shift the box back by half its width and height */
+    text-align: center;
+    border-radius: 10px;
+
+}
+
+.login-txt
+{
+    font-family: "Playwrite VN", serif;
+    color:black;
+    font-weight: bold;
+    opacity: 1;
+    font-size: 25px;
+    padding-top:10px;
+    
+}
+
+.subs
+{
+    font-family: "Playwrite VN", serif;
+    color:gray;
+    padding:15px;
+    font-size:10px;
+}
+
+.inputbox1,
+.inputbox2
+{
+    width:300px;
+    height:40px;
+    border:none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+
+
+.username,
+.password
+{
+    text-align: left;
+    font-family: "Playwrite VN", serif;
+    font-size: 10px;
+}
+
+
+
+.credentials
+{
+    width:300px;
+    height:auto;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 220px;
+}
+
+.login-butt
+{
+    width:200px;
+    height:40px;
+    margin-top: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    border:none;
+    border-radius:10px;
+    background-color: black;
+    color:white;
+    font-weight: bold;
+    cursor:pointer;
+
+     &:hover
+     {
+        transform: translateY(-2px);
+     }
+
+    &:active
+    {
+        background-color: white ;
+        color: black ;
+    }
+}
+
+
