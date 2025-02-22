@@ -106,6 +106,30 @@ app.post("/signup", async (req, res) => {
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
+    const transporter = nodemailer.createTransport({
+        host: process.env.EMAIL_HOST,
+        port: parseInt(process.env.EMAIL_PORT, 10), // Ensure it's a number
+        secure: process.env.EMAIL_SECURE === 'true', // Should be false for port 587
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS
+        },
+        tls: {
+            rejectUnauthorized: false // Allow self-signed certificates (Optional)
+        }
+    });
+
+    // Send Welcome Email
+    await transporter.sendMail({
+        from: process.env.EMAIL_USER,
+        to: newUser.email,  // Corrected this
+        subject: "Welcome to Artistry",
+        html: `<p>Hello ${newUser.username},</p>
+               <p>Thank you for signing up! Welcome to Artistry. You can now log in and explore. 😊🎨</p>
+               <p>Best Regards,</p>
+               <p>Artistry Team</p>`
+    });
+
     res.redirect('/');
 });
 
