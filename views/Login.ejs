@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="/images/favicon.ico">
 
     <title>Artistry | <%= title %></title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="login-container">
-        <form action="/login" method="POST">
+        <form action="/" method="POST">
             <div class="login-txt">Login</div>
             <div class="subs">Welcome Back! Please Login To Your Account.</div>
 
@@ -25,12 +25,12 @@
             <div class="credentials">
                 <div class="username">
                     <label>Username:</label>
-                    <input class="inputbox1" type="text" name="username" placeholder="Username" required>
+                    <input class="inputbox1" type="text" name="username" placeholder="Enter your username" required>
                 </div>
 
                 <div class="password">
                     <label>Password:</label>
-                    <input class="inputbox2" type="password" name="password" placeholder="Password" required>
+                    <input class="inputbox2" type="password" name="password" placeholder="Enter your password" required>
                 </div>
 
                 <div class="forgot-pass"><a href="/forgot">Forgot Password?</a></div>
