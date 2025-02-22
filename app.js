@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const session = require("express-session");
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 require("dotenv").config();
 
 const mongoURI = process.env.MONGO_URI || 'mongodb+srv://Artistry:Artistry1125@cluster0.5um3y.mongodb.net/artistry?retryWrites=true&w=majority';
@@ -38,7 +40,9 @@ app.set('views', __dirname + '/views');
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    password: String
+    password: String,
+    resetToken: String,  // Added for password reset
+    resetTokenExpiry: Date
 }, { collection: 'signin_users' });
 
 const User = mongoose.model("User", userSchema);
@@ -65,9 +69,7 @@ app.post("/", async (req, res) => {
         return res.render("Login", { title: "Login", error: "Invalid username or password!" });
     }
 
-    // Store user session
     req.session.user = { id: user._id, username: user.username };
-
     res.redirect("/homepage");
 });
 
@@ -105,6 +107,66 @@ app.post("/signup", async (req, res) => {
     await newUser.save();
 
     res.redirect('/');
+});
+
+// Forgot Password Route
+app.get("/forgot", (req, res) => {
+    res.render("Forgot", { title: 'Forgot Password', error: null });
+});
+
+app.post('/forgot', async (req, res) => {
+    const { email } = req.body;  
+
+    try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.render('Forgot', { title: 'Forgot Password', error: "Email not found" });
+        }
+
+        // Generate a password reset token
+        const resetToken = crypto.randomBytes(32).toString("hex");
+        const hashedToken = crypto.createHash("sha256").update(resetToken).digest("hex");
+
+        // Store token in database
+        user.resetToken = hashedToken;
+        user.resetTokenExpiry = Date.now() + 3600000; // 1 hour expiry
+        await user.save();
+
+        // Construct reset link
+        const resetLink = `http://localhost:1125/reset/${resetToken}`;
+
+        const transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            port: parseInt(process.env.EMAIL_PORT, 10), // Ensure it's a number
+            secure: process.env.EMAIL_SECURE === 'true', // Should be false for port 587
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            },
+            tls: {
+                rejectUnauthorized: false // Allow self-signed certificates (Optional)
+            }
+        });
+        
+
+        // Send Password Reset Email
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: user.email,
+            subject: "Password Reset Request",
+            html: `<p>Hello ${user.username},</p>
+                   <p>Click the link below to reset your password:</p>
+                   <a href="${resetLink}">${resetLink}</a>
+                   <p>This link will expire in 1 hour.</p>`
+        });
+
+        res.render('Forgot', { title: 'Forgot Password', error: "Password reset link sent! Check your email." });
+
+    } catch (error) {
+        console.error(error);
+        res.render('Forgot', { title: 'Forgot Password', error: "Something went wrong. Try again." });
+    }
 });
 
 // Start server
