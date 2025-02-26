@@ -51,8 +51,7 @@ ol {
 }
 
 /* Icon hover effect */
-.cart:hover,
-.list:hover {
+.cart:hover {
     opacity: 0.7;
 }
 
@@ -92,5 +91,68 @@ ol {
     .icons {
         margin-top: 20px;
         justify-content: flex-start;
+    }
+}
+
+
+/* Dropdown Container */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Initially Hidden */
+.dropdown {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    background-color: white;
+    top: 35px; /* Adjust as needed */
+    left: 0;
+    width: 5cm;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 8px 0;
+    border-radius: 5px;
+    z-index: 10;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-in-out;
+    transform: translateY(-5px);
+    margin-left: -4cm;
+}
+
+/* Keep Dropdown Visible When Hovering Over Container or Dropdown */
+.dropdown-container:hover .dropdown,
+.dropdown:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Dropdown List Styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect on List Items */
+ul li:hover {
+    background-color: antiquewhite;
+    cursor: pointer;
+}
+
+
+/* Mobile-Friendly Dropdown */
+@media (max-width: 768px) {
+    .dropdown {
+        right: auto;
+        left: 0;
+        width: 100%; /* Full width dropdown for better mobile usability */
     }
 }

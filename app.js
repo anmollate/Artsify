@@ -47,6 +47,19 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+const transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: parseInt(process.env.EMAIL_PORT, 10), // Ensure it's a number
+    secure: process.env.EMAIL_SECURE === 'true', // Should be false for port 587
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false // Allow self-signed certificates (Optional)
+    }
+});
+
 // Routes
 app.get("/", (req, res) => {
     res.render("Login", { title: "Login", error: null });
@@ -106,18 +119,7 @@ app.post("/signup", async (req, res) => {
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
-    const transporter = nodemailer.createTransport({
-        host: process.env.EMAIL_HOST,
-        port: parseInt(process.env.EMAIL_PORT, 10), // Ensure it's a number
-        secure: process.env.EMAIL_SECURE === 'true', // Should be false for port 587
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        },
-        tls: {
-            rejectUnauthorized: false // Allow self-signed certificates (Optional)
-        }
-    });
+
 
     // Send Welcome Email
     await transporter.sendMail({
@@ -192,6 +194,28 @@ app.post('/forgot', async (req, res) => {
         res.render('Forgot', { title: 'Forgot Password', error: "Something went wrong. Try again." });
     }
 });
+
+app.get('/contact', (req, res) => {
+    res.render('contact', { title: 'Contact Us' });
+});
+app.post("/send-email", async (req, res) => {
+    const { name, email, subject, message } = req.body;
+
+    const mailOptions = {
+        from: email,
+        to: "artistry1125@gmail.com",
+        subject: `New Contact Form Submission: ${subject}`,
+        text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`
+    };
+
+    try {
+        await transporter.sendMail(mailOptions);
+        res.status(200).json({ success: true, message: "Email sent successfully!" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: "Email failed to send.", error });
+    }
+});
+
 
 // Start server
 const PORT = process.env.PORT || 1125;
