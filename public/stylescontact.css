@@ -4,68 +4,127 @@ body {
     background-color: #FAF7F5;
     margin: 0;
     padding: 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align everything */
+    min-height: 100vh; /* Ensure body takes full viewport height */
 }
 
+/* Header Styling */
 header h1 {
-    color: #333;
-    margin-top: 20px;
+    margin: 20px 0;
+    font-size: clamp(24px, 5vw, 28px); /* Responsive font size */
+    font-weight: 700;
+    text-align: center; /* Ensure text is centered */
 }
 
 /* Contact Form Styling */
 .contact-form {
-    width: 50%;
-    margin: 20px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: min(90%, 600px); /* Use min() for better responsiveness */
+    background: #fff;
+    padding: clamp(15px, 5%, 25px); /* Responsive padding */
+    border-radius: 12px;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    text-align: left; /* Align form elements to left */
+    margin: 20px 0; /* Add margin for spacing */
 }
 
+/* Label Styling */
 label {
     display: block;
-    margin: 10px 0 5px;
+    margin-bottom: 6px;
     font-weight: 600;
-    color: #555;
+    color: #444;
+    font-size: clamp(14px, 3vw, 15px); /* Responsive font size */
 }
 
+/* Input and Textarea Styling */
 input, textarea {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: clamp(14px, 4vw, 16px); /* Responsive font size */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Add box-shadow transition */
+    display: block; /* Ensures full width */
 }
 
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Add focus effect */
+    outline: none;
+}
+
+/* Button Styling */
 button {
+    width: 100%;
     background-color: #007BFF;
     color: white;
-    padding: 10px 15px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 6px;
+    font-size: clamp(15px, 4vw, 17px); /* Responsive font size */
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.1s ease-in-out;
 }
 
 button:hover {
     background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+button:active {
+    transform: scale(0.98); /* Add click effect */
 }
 
 /* Footer Styling */
 footer {
-    margin-top: 20px;
-    padding: 10px;
+    margin-top: auto; /* Push footer to the bottom */
+    padding: 15px;
     background: #fff;
+    font-size: clamp(12px, 3vw, 14px); /* Responsive font size */
+    font-weight: 500;
+    text-align: center;
+    width: 100%; /* Full width */
 }
 
 footer a {
     text-decoration: none;
     color: #007BFF;
-    font-weight: bold;
+    font-weight: 600;
+    transition: color 0.3s, text-decoration 0.3s; /* Smooth underline transition */
 }
 
 footer a:hover {
     text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-form {
+        width: min(90%, 600px); /* Consistent width */
+        padding: clamp(15px, 5%, 20px); /* Responsive padding */
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: clamp(20px, 6vw, 24px); /* More responsive font size */
+    }
+
+    .contact-form {
+        width: min(95%, 600px); /* Slightly wider on small screens */
+        padding: clamp(10px, 5%, 15px); /* Smaller padding */
+    }
+
+    input, textarea {
+        font-size: clamp(12px, 4vw, 14px); /* Smaller font size */
+    }
+
+    button {
+        font-size: clamp(14px, 4vw, 15px); /* Smaller font size */
+    }
 }

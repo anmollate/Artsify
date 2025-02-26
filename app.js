@@ -42,8 +42,10 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: String,
     resetToken: String,  // Added for password reset
-    resetTokenExpiry: Date
+    resetTokenExpiry: Date,
+    profileImage: { type: String } // Stores base64-encoded image
 }, { collection: 'signin_users' });
+
 
 const User = mongoose.model("User", userSchema);
 

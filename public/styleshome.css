@@ -156,3 +156,34 @@ ul li:hover {
         width: 100%; /* Full width dropdown for better mobile usability */
     }
 }
+
+.profile
+{
+    display: inline-flex;
+    width:10cm;
+    height: 5cm;
+    background-color: #F2EBDD;
+    margin-top:10px;
+    margin-left:10px;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+.profile-pic
+{
+    width:2.5cm;
+    height:2.5cm;
+    background-color: white;
+    border-radius: 1.25cm;
+}
+
+.userinfo
+{
+    width:6cm;
+    height:2cm;
+    background-color: white;
+    margin-left: 15px;
+    margin-top: 9px;
+    border-radius: 10px;
+}
