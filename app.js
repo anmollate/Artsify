@@ -218,6 +218,10 @@ app.post("/send-email", async (req, res) => {
     }
 });
 
+app.get('/shop', (req, res) => {
+    res.render('shop', { title: 'Shop' });
+});
+
 
 // Start server
 const PORT = process.env.PORT || 1125;

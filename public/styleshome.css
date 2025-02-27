@@ -159,7 +159,7 @@ ul li:hover {
 
 .profile
 {
-    display: inline-flex;
+
     width:10cm;
     height: 5cm;
     background-color: #F2EBDD;
@@ -172,18 +172,147 @@ ul li:hover {
 
 .profile-pic
 {
+    display:inline-block;
     width:2.5cm;
     height:2.5cm;
     background-color: white;
     border-radius: 1.25cm;
 }
+.profileimage
+{
+    width:100%;
+    height:100%;
+    border-radius: 1.25cm;
+}
 
 .userinfo
 {
+    display:inline-block;
     width:6cm;
     height:2cm;
-    background-color: white;
+    /* background-color: white; */
     margin-left: 15px;
-    margin-top: 9px;
+    border-radius: 10px;
+    margin-bottom:10px;
+    margin-top: 10px;
+    position: absolute;
+}
+
+.uname
+{
+    margin-left:10px;
+    margin-top:5px;
+    margin-bottom:0px;
+}
+.udesc
+{
+    margin-left:10px;
+    margin-top:0px;
+    color: gray;
+}
+
+.updateprofile
+{
+    width:auto;
+    height: 30px;
+    border:none;
+    border-radius: 10px;
+    background-color: #1e5d51;
+    color:white;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: small;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.update
+{
+    text-decoration: none;
+    color:inherit;
+}
+
+.posts
+{
+    width:35%;
+    height: 92.3vh;
+    /* background-color: greenyellow; */
+    margin-top: 10px;
+    margin-left: 150px;
+    padding-left:70px;
+    overflow: auto;
+}
+.posts::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+.pagecontent
+{
+    display:flex;
+}
+
+.post {
+    width: 400px;
+    height: 500px;
+    background-color: white;
+    margin-top: 35px;
+    margin-bottom: 35px;
+    position: relative; /* Needed for absolute positioning of .postinfo */
+    overflow: hidden; /* Ensures no overflow issues */
     border-radius: 10px;
 }
+
+.postimg {
+    width: 100%;
+    display: block; /* Ensures no extra space */
+    z-index: 0; /* Keeps the image behind */
+    position: relative; /* Ensures stacking context */
+}
+
+.pfp {
+    position: absolute; /* Moves it freely over other elements */
+    top: 430px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    z-index: 2; /* Places it above .postimg */
+    width:35px;
+    border-radius: 17.5px;
+}
+
+.username
+{
+    position: absolute; /* Moves it freely over other elements */
+    top: 420px; /* Adjust as needed */
+    left: 70px; /* Adjust as needed */
+    z-index: 2; /* Places it above .postimg */
+    font-weight: bold;
+    font-size: small;
+    color:white;
+}
+
+.Desc
+{
+    position:absolute;
+    top: 440px;
+    left: 70px;
+    z-index: 2;
+    font-size: small;
+    color:gray;
+    font-weight: bold;
+}
+
+.viewshop
+{
+    position: absolute;
+    top: 438px;
+    left: 200px;
+    z-index: 2;
+    font-size: small;
+    background-color: #007BFF;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border:none;
+    height:20px;
+    border-radius: 5px;
+}
+
