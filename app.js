@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require("mongoose");
+const multer = require('multer');
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const session = require("express-session");
@@ -36,14 +37,17 @@ app.use(session({
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 
-// User Schema
+
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    password: String,
+    phno: { type: String, unique: true, required: true }, // Changed to String
+    bio: { type: String, required: false },
+    age: { type: Number, required: false },
+    profileImage: { type: String }, // Stores image URL or base64-encoded string
+    password: { type: String, required: true }, // Ensure password is required
     resetToken: String,  // Added for password reset
-    resetTokenExpiry: Date,
-    profileImage: { type: String } // Stores base64-encoded image
+    resetTokenExpiry: Date
 }, { collection: 'signin_users' });
 
 
@@ -220,6 +224,10 @@ app.post("/send-email", async (req, res) => {
 
 app.get('/shop', (req, res) => {
     res.render('shop', { title: 'Shop' });
+});
+
+app.get('/cart', (req, res) => {
+    res.render('cart', { title: 'Cart' });
 });
 
 

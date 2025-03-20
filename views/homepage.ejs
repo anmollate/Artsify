@@ -13,38 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="menubar">
-        <img class="logo" src="images/Logo.png" alt="Website Logo"> <!-- Added alt text -->
-        <nav class="list">
-            <ol class="olist1">
-                <li><a class="HOME" href="/homepage">HOME</a></li>
-                <li><a class="HOME" href="/shop">SHOP</a></li>
-                <li>CATEGORIES</li>
-                <li><a class="HOME" href="/about">ABOUT&nbsp;US</a></li>
-                <li><a class="HOME" href="/contact">CONTACT</a></li>
-            </ol>
-        </nav>
-
-        <div class="icons">
-            <ol class="olist2">
-                <li><input class="search" type="text" placeholder="Search"></li>
-                <li><img class="cart" src="images/shopping-cart.webp" alt="Shopping Cart"></li> <!-- Added alt text -->
-                <div class="dropdown-container">
-                <li><img class="list" src="images/list.webp" alt="List Icon">
-                    <div class="dropdown">
-                        <ul>
-                            <li>Your Profile</li>
-                            <li>Your Orders</li>
-                            <li>Posts</li>
-                            <li>Settings</li>
-                            <li>My Shop</li>
-                        </ul>
-                    </div>
-                    </div>
-                </li> <!-- Added alt text -->
-            </ol>
-        </div>
-    </div>
+    <%- include('menu') %>
 <div class="pagecontent">
     <div class="profile">
         <div class="profile-pic"> <img class="profileimage" src="images/pfp.jpeg"></div>

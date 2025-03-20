@@ -1,0 +1,182 @@
+<main>
+    <h2>Your Cart</h2>
+    <div id="cart-items"></div>
+    <p id="empty-cart-message">Your cart is empty.</p>
+    <p>Subtotal: ₹ <span id="subtotal-price">0.00</span></p>
+    <p>GST (12%): ₹ <span id="gst-price">0.00</span></p>
+    <p>Total: ₹ <span id="total-price">0.00</span></p>
+    <button id="clear-cart">Clear Cart</button>
+    <button id="print-invoice">Print Invoice</button>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let cartItemsContainer = document.getElementById("cart-items");
+    let emptyCartMessage = document.getElementById("empty-cart-message");
+    let subtotalElement = document.getElementById("subtotal-price");
+    let gstElement = document.getElementById("gst-price");
+    let totalPriceElement = document.getElementById("total-price");
+    let clearCartButton = document.getElementById("clear-cart");
+    let printInvoiceButton = document.getElementById("print-invoice");
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function updateCartDisplay() {
+        cartItemsContainer.innerHTML = "";
+        let subtotal = 0;
+
+        if (cart.length === 0) {
+            emptyCartMessage.style.display = "block";
+            cartItemsContainer.style.display = "none";
+            clearCartButton.style.display = "none";
+            printInvoiceButton.style.display = "none";
+            subtotalElement.innerText = "0.00";
+            gstElement.innerText = "0.00";
+            totalPriceElement.innerText = "0.00";
+        } else {
+            emptyCartMessage.style.display = "none";
+            cartItemsContainer.style.display = "block";
+            clearCartButton.style.display = "block";
+            printInvoiceButton.style.display = "block";
+
+            cart.forEach((item, index) => {
+                let productElement = document.createElement("div");
+                productElement.classList.add("cart-item");
+                productElement.innerHTML = `
+                    <img src="images/${item.name}.jpg" alt="${item.name}" width="50">
+                    <p>${item.name} - ₹${item.price}</p>
+                    <button class="remove-item" data-index="${index}">Remove</button>
+                `;
+                cartItemsContainer.appendChild(productElement);
+                subtotal += parseFloat(item.price);
+            });
+
+            let gst = subtotal * 0.12; // **12% GST Calculation**
+            let total = subtotal + gst;
+
+            subtotalElement.innerText = subtotal.toFixed(2);
+            gstElement.innerText = gst.toFixed(2);
+            totalPriceElement.innerText = total.toFixed(2);
+        }
+    }
+
+    // Remove Item and Shift Array Left
+    cartItemsContainer.addEventListener("click", function (event) {
+        if (event.target.classList.contains("remove-item")) {
+            let index = parseInt(event.target.getAttribute("data-index"));
+
+            for (let i = index; i < cart.length - 1; i++) {
+                cart[i] = cart[i + 1]; // Shift elements left
+            }
+            cart.pop(); // Remove last duplicate element
+
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartDisplay();
+        }
+    });
+
+    // **Completely Delete the Cart**
+    clearCartButton.addEventListener("click", function () {
+        localStorage.removeItem("cart"); // Fully delete cart
+        cart = []; // Empty cart array in memory
+        updateCartDisplay(); // Refresh cart display
+    });
+
+    // Print Invoice
+    printInvoiceButton.addEventListener("click", function () {
+        let date = new Date();
+        let day = date.toLocaleDateString('en-US', { weekday: 'long' });
+        let dateString = date.toLocaleDateString();
+        let timeString = date.toLocaleTimeString();
+
+        if (cart.length === 0) {
+            alert("Cart is empty. Add items before printing.");
+            return;
+        }
+
+        let invoiceWindow = window.open("", "_blank");
+        invoiceWindow.document.write(`
+            <html>
+            <head>
+                <title>Invoice - Artistry</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    h2 { text-align: center; }
+                    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+                    th, td { border: 1px solid black; padding: 10px; text-align: left; }
+                    .total { text-align: right; font-weight: bold; }
+                </style>
+            </head>
+            <body>
+                <h2>Artistry - Invoice</h2>
+                <p><strong>Date:</strong> ${dateString} | <strong>Day:</strong> ${day} | <strong>Time:</strong> ${timeString}</p>
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (₹)</th>
+                    </tr>
+                    ${cart.map(item => `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>${item.price}</td>
+                        </tr>`).join("")}
+                    <tr class="total">
+                        <td><strong>Subtotal</strong></td>
+                        <td><strong>₹${subtotalElement.innerText}</strong></td>
+                    </tr>
+                    <tr class="total">
+                        <td><strong>GST (12%)</strong></td>
+                        <td><strong>₹${gstElement.innerText}</strong></td>
+                    </tr>
+                    <tr class="total">
+                        <td><strong>Total</strong></td>
+                        <td><strong>₹${totalPriceElement.innerText}</strong></td>
+                    </tr>
+                </table>
+                <script>
+                    setTimeout(() => window.print(), 500);
+                <\/script>
+            </body>
+            </html>
+        `);
+        setTimeout(() => invoiceWindow.document.close(), 1000);
+    });
+
+    updateCartDisplay();
+});
+</script>
+
+<style>
+    #cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+    #clear-cart, #print-invoice {
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: red;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #print-invoice {
+        background-color: green;
+    }
+    .remove-item {
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: orange;
+        border: none;
+        cursor: pointer;
+    }
+</style>
