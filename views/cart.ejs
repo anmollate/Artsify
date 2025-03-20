@@ -7,6 +7,8 @@
     <p>Total: ₹ <span id="total-price">0.00</span></p>
     <button id="clear-cart">Clear Cart</button>
     <button id="print-invoice">Print Invoice</button>
+    <button id="generate-qr">Generate QR</button>
+    <div id="qr-code"></div>
 </main>
 
 <script>
@@ -18,6 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let totalPriceElement = document.getElementById("total-price");
     let clearCartButton = document.getElementById("clear-cart");
     let printInvoiceButton = document.getElementById("print-invoice");
+    let generateQRButton = document.getElementById("generate-qr");
+    let qrCodeContainer = document.getElementById("qr-code");
 
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -59,6 +63,23 @@ document.addEventListener("DOMContentLoaded", function () {
             totalPriceElement.innerText = total.toFixed(2);
         }
     }
+
+    generateQRButton.addEventListener("click", function () {
+    let upiID = "banana@okaxis"; // Replace with your actual UPI ID
+    let totalAmount = parseFloat(totalPriceElement.innerText); // Ensure it's a number
+
+    if (totalAmount === 0 || isNaN(totalAmount)) {
+        alert("Cart is empty. Add items before generating a QR code.");
+        return;
+    }
+
+    let upiString = `upi://pay?pa=${upiID}&pn=Artistry&am=${totalAmount.toFixed(2)}&cu=INR`;
+    let qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiString)}`;
+    console.log("Generated QR URL:", qrURL);
+
+    qrCodeContainer.innerHTML = `<img src="${qrURL}" alt="UPI Payment QR Code">`;
+});
+
 
     // Remove Item and Shift Array Left
     cartItemsContainer.addEventListener("click", function (event) {
@@ -159,12 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
         padding: 10px;
         border: 1px solid #ddd;
     }
-    #clear-cart, #print-invoice {
+    #clear-cart, #print-invoice, #generate-qr {
         margin-top: 10px;
         padding: 10px 15px;
         background-color: red;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        font-weight: bold;
         color: white;
         border: none;
         cursor: pointer;
@@ -172,11 +191,17 @@ document.addEventListener("DOMContentLoaded", function () {
     #print-invoice {
         background-color: green;
     }
+    #generate-qr {
+        background-color: blue;
+    }
     .remove-item {
         margin-left: 10px;
         padding: 5px 10px;
         background-color: orange;
         border: none;
         cursor: pointer;
+    }
+    #qr-code {
+        margin-top: 20px;
     }
 </style>
