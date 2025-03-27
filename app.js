@@ -1,4 +1,6 @@
 const express = require('express');
+const fs = require("fs");
+const path = require("path"); 
 const mongoose = require("mongoose");
 const multer = require('multer');
 const bcrypt = require("bcrypt");
@@ -41,10 +43,9 @@ app.set('views', __dirname + '/views');
 const userSchema = new mongoose.Schema({
     username: { type: String, unique: true, required: true },
     email: { type: String, unique: true, required: true },
-    phno: { type: String, unique: true, required: true }, // Changed to String
-    bio: { type: String, required: false },
-    age: { type: Number, required: false },
-    profileImage: { type: String }, // Stores image URL or base64-encoded string
+    // bio: { type: String, required: false },
+    // age: { type: Number, required: false },
+    // profileImage: { type: String }, // Stores image URL or base64-encoded string
     password: { type: String, required: true }, // Ensure password is required
     resetToken: String,  // Added for password reset
     resetTokenExpiry: Date
@@ -228,6 +229,28 @@ app.get('/shop', (req, res) => {
 
 app.get('/cart', (req, res) => {
     res.render('cart', { title: 'Cart' });
+});
+
+app.get("/categories", (req, res) => {
+    res.render("categories");
+});
+
+// API route to fetch products by category
+app.get("/api/products/:category", (req, res) => {
+    const category = req.params.category;
+
+    // Read JSON file
+    fs.readFile(path.join(__dirname, "data/products.json"), "utf8", (err, data) => {
+        if (err) {
+            console.error("Error reading file:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+
+        const products = JSON.parse(data);
+        const filteredProducts = products.filter(product => product.category === category);
+
+        res.json(filteredProducts);
+    });
 });
 
 

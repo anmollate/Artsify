@@ -9,6 +9,11 @@
     <button id="print-invoice">Print Invoice</button>
     <button id="generate-qr">Generate QR</button>
     <div id="qr-code"></div>
+
+    <div id="recommended-items">
+        <h3>Recommended Items</h3>
+    </div>
+    
 </main>
 
 <script>
@@ -65,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     generateQRButton.addEventListener("click", function () {
-    let upiID = "banana@okaxis"; // Replace with your actual UPI ID
+    let upiID = "anmollate@okaxis"; // Replace with your actual UPI ID
     let totalAmount = parseFloat(totalPriceElement.innerText); // Ensure it's a number
 
     if (totalAmount === 0 || isNaN(totalAmount)) {
@@ -165,9 +170,115 @@ document.addEventListener("DOMContentLoaded", function () {
 
     updateCartDisplay();
 });
+
+function displayRecommendedItems() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let recommendationsContainer = document.getElementById("recommended-items");
+
+    if (!recommendationsContainer) {
+        recommendationsContainer = document.createElement("div");
+        recommendationsContainer.id = "recommended-items";
+        recommendationsContainer.innerHTML = "<h3>Recommended Items</h3>";
+        document.querySelector("main").appendChild(recommendationsContainer);
+    }
+
+    recommendationsContainer.innerHTML = "<h3>You Might Also Like</h3>";
+
+    if (cart.length === 0) {
+        recommendationsContainer.innerHTML += "<p>No recommendations available.</p>";
+        return;
+    }
+
+    let cartCategories = [...new Set(cart.map(item => item.category))];
+
+    fetch("/data/products.json") // Replace with your actual dataset path
+        .then(response => response.json())
+        .then(products => {
+            let recommendedItems = products.filter(
+                item => cartCategories.includes(item.category) && !cart.some(cartItem => cartItem.id === item.id)
+            );
+
+            if (recommendedItems.length === 0) {
+                recommendationsContainer.innerHTML += "<p>No similar items found.</p>";
+                return;
+            }
+
+            let recommendationsHTML = '<div class="recommended-list">';
+            recommendedItems.forEach(item => {
+                recommendationsHTML += `
+                    <div class="recommended-item">
+                        <img src="${item.image}" alt="${item.name}" width="50">
+                        <p>${item.name} - ₹${item.price}</p>
+                        <button onclick="addToCart(${item.id}, '${item.name}', ${item.price}, '${item.category}', '${item.image}')">Add to Cart</button>
+                    </div>
+                `;
+            });
+            recommendationsHTML += '</div>';
+            recommendationsContainer.innerHTML += recommendationsHTML;
+        })
+        .catch(error => console.error("Error fetching recommended items:", error));
+}
+
+displayRecommendedItems();
+
+function addToCart(id, name, price, category, image) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Check if the item is already in the cart
+    let existingItem = cart.find(item => item.id === id);
+    if (existingItem) {
+        alert(`${name} is already in the cart.`);
+        return;
+    }
+
+    // Add the item to the cart
+    cart.push({ id, name, price, category, image });
+
+    // Save to localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Refresh the cart display immediately
+    updateCartDisplay();  // Ensure UI updates instantly
+
+    alert(`${name} added to cart successfully!`);
+}
+
+
+
 </script>
 
 <style>
+    #recommended-items {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 2px solid #ddd;
+}
+.recommended-list {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.recommended-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    width: 120px;
+}
+.recommended-item img {
+    width: 100%;
+    height: auto;
+}
+.recommended-item button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+.recommended-item button:hover {
+    background-color: #0056b3;
+}
+
     #cart-items {
         display: flex;
         flex-direction: column;
