@@ -209,6 +209,148 @@
         "image": "images/painting 30.jpg",
         "price": 252500,
         "category": "portrait"
+    },
+    {
+        "id": 31,
+        "name": "Painting 31",
+        "image": "images/painting 31.jpg",
+        "price": 2520,
+        "category": "mandala art"
+    },
+    {
+        "id": 32,
+        "name": "Painting 32",
+        "image": "images/painting 32.jpg",
+        "price": 3000,
+        "category": "mandala art"
+    },
+    {
+        "id": 33,
+        "name": "Painting 33",
+        "image": "images/painting 33.jpg",
+        "price": 5000,
+        "category": "mandala art"
+    },
+    {
+        "id": 34,
+        "name": "Painting 34",
+        "image": "images/painting 34.jpg",
+        "price": 4000,
+        "category": "mandala art"
+    },
+    {
+        "id": 35,
+        "name": "Painting 35",
+        "image": "images/painting 35.jpg",
+        "price": 2000,
+        "category": "mandala art"
+    },
+    {
+        "id": 36,
+        "name": "Painting 36",
+        "image": "images/painting 36.jpg",
+        "price": 11000,
+        "category": "madhubani art"
+    },
+    {
+        "id": 37,
+        "name": "Painting 37",
+        "image": "images/painting 37.jpg",
+        "price": 13000,
+        "category": "madhubani art"
+    },
+    {
+        "id": 38,
+        "name": "Painting 38",
+        "image": "images/painting 38.jpg",
+        "price": 1500,
+        "category": "madhubani art"
+    },
+    {
+        "id": 39,
+        "name": "Painting 39",
+        "image": "images/painting 39.jpg",
+        "price": 700,
+        "category": "handicraft"
+    },
+    {
+        "id": 40,
+        "name": "Painting 40",
+        "image": "images/painting 40.jpg",
+        "price": 7000,
+        "category": "handicraft"	
+    },
+    {
+        "id": 41,
+        "name": "Painting 41",
+        "image": "images/painting 41.jpg",
+        "price": 190,
+        "category": "handicraft"
+
+    },
+    {
+        "id": 42,
+        "name": "Painting 42",
+        "image": "images/painting 42.jpg",
+        "price": 190,
+        "category": "handicraft"
+    },
+    {
+        "id": 43,
+        "name": "Painting 43",
+        "image": "images/painting 43.jpg",
+        "price": 190,
+        "category": "handicraft"
+    },
+    {
+        "id": 44,
+        "name": "Painting 44",
+        "image": "images/painting 44.jpg",
+        "price": 190,
+        "category": "handicraft"
+    },
+    {
+        "id": 45,
+        "name": "Painting 45",
+        "image": "images/painting 45.jpg",
+        "price": 1900,
+        "category": "handicraft"
+    },
+    {
+        "id": 46,
+        "name": "Painting 46",
+        "image": "images/painting 46.jpg",
+        "price": 19000,
+        "category": "handicraft"
+    },
+    {
+        "id": 47,
+        "name": "Painting 47",
+        "image": "images/painting 47.jpg",
+        "price": 21900,
+        "category": "handicraft"
+    },
+    {
+        "id": 48,
+        "name": "Painting 48",
+        "image": "images/painting 48.jpg",
+        "price": 3000,
+        "category": "handicraft"
+    },
+    {
+        "id": 49,
+        "name": "Painting 49",
+        "image": "images/painting 49.jpg",
+        "price": 19000,
+        "category": "handicraft"
+    },
+    {
+        "id": 50,
+        "name": "Painting50",
+        "image": "images/painting 50.jpg",
+        "price": 2000,
+        "category":"handicraft"
     }
+
 
 ]
