@@ -10,7 +10,13 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 require("dotenv").config();
 
-const mongoURI = process.env.MONGO_URI || 'mongodb+srv://Artistry:Artistry1125@cluster0.5um3y.mongodb.net/artistry?retryWrites=true&w=majority';
+const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  console.error("MongoDB URI not set in environment variables!");
+  process.exit(1); // stop app if URI is missing
+}
+
 
 const app = express();
 
@@ -167,7 +173,10 @@ app.post('/forgot', async (req, res) => {
         await user.save();
 
         // Construct reset link
-        const resetLink = `http://localhost:1125/reset/${resetToken}`;
+        // const resetLink = `http://localhost:1125/reset/${resetToken}`;
+        const BASE_URL = process.env.BASE_URL || "http://localhost:1125";
+        const resetLink = `${BASE_URL}/reset/${resetToken}`;
+
 
         const transporter = nodemailer.createTransport({
             host: process.env.EMAIL_HOST,
@@ -255,7 +264,12 @@ app.get("/api/products/:category", (req, res) => {
 
 
 // Start server
+// const PORT = process.env.PORT || 1125;
+// app.listen(PORT, () => {
+//     console.log(`Server Listening At: http://localhost:${PORT}`);
+// });
 const PORT = process.env.PORT || 1125;
+
 app.listen(PORT, () => {
-    console.log(`Server Listening At: http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
