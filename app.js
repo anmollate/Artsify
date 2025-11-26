@@ -268,7 +268,7 @@ app.get("/api/products/:category", (req, res) => {
 // app.listen(PORT, () => {
 //     console.log(`Server Listening At: http://localhost:${PORT}`);
 // });
-const PORT = process.env.PORT || 1125;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`✅ Server running on port http://localhost:${PORT}`);
